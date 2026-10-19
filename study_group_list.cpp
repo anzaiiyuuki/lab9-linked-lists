@@ -36,12 +36,55 @@ public:
     // ===== Resolve these TODOs later (Part D) =====
 
     // TODO (Part D): Write addGroup. It receives a group code and room number, adds one node at the end, and updates groupCount.
+
+    void addGroup(const string& newGroupCode, int newMeetingRoom)
+    {
+        Node *newNode = new Node;
+        newNode->groupCode = newGroupCode;
+        newNode->meetingRoom = newMeetingRoom;
+        newNode->next = nullptr;
+
+        if (head == nullptr)
+        {
+            head = newNode;
+        }
+        else
+        {
+            Node *currentNode = head;
+
+            while (currentNode->next != nullptr)
+            {
+                currentNode = currentNode->next;
+            }
+
+            currentNode->next = newNode;
+        }
+
+        groupCount++;
+    }
     // TODO (Part D): Write displayGroups as a const member function.
+        void displayGroups() const
+    {
+        Node *currentNode = head;
+
+        while (currentNode != nullptr)
+        {
+            cout << "Group: " << currentNode->groupCode
+                << ", Room: " << currentNode->meetingRoom << endl;
+
+            currentNode = currentNode->next;
+        }
+    }
     // TODO (Part D): Write size as a const member function that returns groupCount.
+        int size() const
+    {
+        return groupCount;
+    }
 
     // ===== Resolve these TODOs later (Part E) =====
 
     // TODO (Part E): Write containsGroup as a const member function that searches by group code.
+    
 };
 
 int main()
