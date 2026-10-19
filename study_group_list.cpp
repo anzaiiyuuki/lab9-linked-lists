@@ -16,10 +16,12 @@ private:
     // ===== Resolve these TODOs now (Part C) =====
 
     // TODO (Part C): Define a Node with string groupCode, int meetingRoom, and Node *next.
-    string groupCode;
-    int meetingRoom;
-    Node *next;
-
+    struct Node
+    {
+        string groupCode;
+        int meetingRoom;
+        Node *next;
+    };
     // TODO (Part C): Declare a Node *head data member for the first node address.
     Node *head;
     // TODO (Part C): Declare an int groupCount data member for the number of stored groups.
@@ -69,7 +71,7 @@ public:
 
         while (currentNode != nullptr)
         {
-            cout << "Group: " << currentNode->groupCode
+            cout << " Study Group: " << currentNode->groupCode
                 << ", Room: " << currentNode->meetingRoom << endl;
 
             currentNode = currentNode->next;
@@ -84,19 +86,47 @@ public:
     // ===== Resolve these TODOs later (Part E) =====
 
     // TODO (Part E): Write containsGroup as a const member function that searches by group code.
-    
+        
+    bool containsGroup(const string& targetGroupCode) const
+    {
+        Node *currentNode = head;
+
+        while (currentNode != nullptr)
+        {
+            if (currentNode->groupCode == targetGroupCode)
+            {
+                return true;
+            }
+
+            currentNode = currentNode->next;
+        }
+
+        return false;
+    }
 };
 
 int main()
 {
-    cout << boolalpha; // escribir en anotaciones again
-
-    // ===== Resolve these TODOs later (Part E) =====
+    cout << boolalpha;
 
     // TODO (Part E): Create a StudyGroupList object.
+    StudyGroupList groups;
+
     // TODO (Part E): Add three dummy groups with different codes and room numbers.
+    groups.addGroup("CHEM-105-C", 201);
+    groups.addGroup("MATH-201-A", 305);
+    groups.addGroup("COEN-2220-B", 110);
+
     // TODO (Part E): Display every stored group and print the result of size().
-    // TODO (Part E): Search for one stored group code and one missing group code; print both bool results.
+    groups.displayGroups();
+    cout << "Total groups: " << groups.size() << endl;
+
+    // TODO (Part E): Search for one stored group code and one missing group code.
+    cout << "Contains COEN-2220-B: "
+         << groups.containsGroup("COEN-2220-B") << endl;
+
+    cout << "Contains PHYS-110-A: "
+         << groups.containsGroup("PHYS-110-A") << endl;
 
     return 0;
 }
